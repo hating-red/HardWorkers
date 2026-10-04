@@ -1,0 +1,169 @@
+globalThis.__timing__.logStart('Load chunks/build/default-CJH_v7UH');import { u as useRoute$1, a as useRuntimeConfig, d as useHead$1, b as useSeoMeta$1, _ as _plugin_vue_export_helper_default } from '../virtual/entry.mjs';
+import { N as NuxtLink } from './nuxt-link-BJ9rYYDi.mjs';
+import { defineComponent, unref, withCtx, createVNode, createTextVNode, toDisplayString, mergeProps, useSSRContext } from 'vue';
+import { ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrRenderSlot, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
+import { a as site, s as services } from '../_/services.mjs';
+import 'nostics';
+import 'nostics/formatters/ansi';
+import '../nitro/nitro.mjs';
+import 'node:http';
+import 'node:https';
+import 'node:events';
+import 'node:buffer';
+import 'node:fs';
+import 'node:path';
+import 'node:crypto';
+import 'node:url';
+import '../routes/renderer.mjs';
+import 'unhead/server';
+import 'unhead/legacy';
+import 'unhead/plugins';
+import 'vue-bundle-renderer/runtime';
+import 'devalue';
+import 'vue-router';
+import 'unhead/utils';
+
+//#region app/components/AppLogo.vue
+var _sfc_main = {};
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
+	_push(`<span${ssrRenderAttrs(mergeProps({ class: "brand-logo" }, _attrs))}><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--yellow)"></rect><path d="M32 12 51 22.5v21L32 54 13 43.5v-21Z" fill="var(--ink)"></path><path d="M13 22.5 32 33l19-10.500M32 33v21" fill="none" stroke="var(--yellow)" stroke-width="3" stroke-linejoin="round"></path><path d="m22.500 17.250 19 10.500v7" fill="none" stroke="var(--orange)" stroke-width="4"></path></svg><span class="brand-text" translate="no"><span class="brand-name">Трудяги<b>Н</b></span><span class="brand-tagline">переезды и грузчики</span></span></span>`);
+}
+var _sfc_setup$1 = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/AppLogo.vue");
+	return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+};
+var AppLogo_default = /*#__PURE__*/ Object.assign(_plugin_vue_export_helper_default(_sfc_main, [["ssrRender", _sfc_ssrRender]]), { __name: "AppLogo" });
+//#endregion
+//#region app/layouts/default.vue?vue&type=script&setup=true&lang.ts
+var default_vue_vue_type_script_setup_true_lang_default = /*@__PURE__*/ defineComponent({
+	__name: "default",
+	__ssrInlineRender: true,
+	setup(__props) {
+		const route = useRoute$1();
+		const { siteUrl, yandexVerification, googleVerification, metrikaId } = useRuntimeConfig().public;
+		useHead$1({
+			link: [{
+				rel: "canonical",
+				href: () => siteUrl + route.path
+			}],
+			meta: [
+				{
+					name: "theme-color",
+					content: "#faf8f1"
+				},
+				{
+					name: "geo.region",
+					content: "RU-PER"
+				},
+				{
+					name: "geo.placename",
+					content: "Пермь"
+				},
+				...yandexVerification ? [{
+					name: "yandex-verification",
+					content: yandexVerification
+				}] : [],
+				...googleVerification ? [{
+					name: "google-site-verification",
+					content: googleVerification
+				}] : []
+			],
+			script: metrikaId ? [{
+				key: "metrika",
+				innerHTML: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(${Number(metrikaId)},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});`
+			}] : []
+		});
+		useSeoMeta$1({
+			ogSiteName: site.name,
+			ogType: "website",
+			ogLocale: "ru_RU",
+			ogUrl: () => siteUrl + route.path,
+			twitterCard: "summary_large_image"
+		});
+		return (_ctx, _push, _parent, _attrs) => {
+			const _component_NuxtLink = NuxtLink;
+			const _component_AppLogo = AppLogo_default;
+			_push(`<!--[--><a class="skip-link" href="#top">Перейти к содержимому</a><header class="topbar">`);
+			_push(ssrRenderComponent(_component_NuxtLink, {
+				class: "brand",
+				to: "/",
+				"aria-label": ("site" in _ctx ? _ctx.site : unref(site)).name
+			}, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(ssrRenderComponent(_component_AppLogo, null, null, _parent, _scopeId));
+					else return [createVNode(_component_AppLogo)];
+				}),
+				_: 1
+			}, _parent));
+			_push(`<nav class="nav" aria-label="Основная навигация">`);
+			_push(ssrRenderComponent(_component_NuxtLink, { to: "/uslugi" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(`Услуги`);
+					else return [createTextVNode("Услуги")];
+				}),
+				_: 1
+			}, _parent));
+			_push(ssrRenderComponent(_component_NuxtLink, { to: "/ceny" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(`Цены`);
+					else return [createTextVNode("Цены")];
+				}),
+				_: 1
+			}, _parent));
+			_push(ssrRenderComponent(_component_NuxtLink, { to: "/#fleet" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(`Парк`);
+					else return [createTextVNode("Парк")];
+				}),
+				_: 1
+			}, _parent));
+			_push(ssrRenderComponent(_component_NuxtLink, { to: "/#reviews" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(`Отзывы`);
+					else return [createTextVNode("Отзывы")];
+				}),
+				_: 1
+			}, _parent));
+			_push(`<a href="#contacts">Контакты</a></nav><a class="phone-link"${ssrRenderAttr("href", `tel:${("site" in _ctx ? _ctx.site : unref(site)).phone}`)}>${ssrInterpolate(("site" in _ctx ? _ctx.site : unref(site)).phoneLabel)}</a></header><main id="top" tabindex="-1">`);
+			ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+			_push(`</main><footer class="footer" id="contacts"><div>`);
+			_push(ssrRenderComponent(_component_AppLogo, { class: "brand-logo-footer" }, null, _parent));
+			_push(`<span>Грузовые перевозки, переезды, грузчики и эвакуатор в Перми.</span><address>${ssrInterpolate(("site" in _ctx ? _ctx.site : unref(site)).city)}, ${ssrInterpolate(("site" in _ctx ? _ctx.site : unref(site)).street)} · ${ssrInterpolate(("site" in _ctx ? _ctx.site : unref(site)).hours)}</address></div><nav class="footer-nav" aria-label="Услуги"><!--[-->`);
+			ssrRenderList("services" in _ctx ? _ctx.services : unref(services), (service) => {
+				_push(ssrRenderComponent(_component_NuxtLink, {
+					key: service.slug,
+					to: `/uslugi/${service.slug}`
+				}, {
+					default: withCtx((_, _push, _parent, _scopeId) => {
+						if (_push) _push(`${ssrInterpolate(service.title)}`);
+						else return [createTextVNode(toDisplayString(service.title), 1)];
+					}),
+					_: 2
+				}, _parent));
+			});
+			_push(`<!--]-->`);
+			_push(ssrRenderComponent(_component_NuxtLink, { to: "/ceny" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(`Цены`);
+					else return [createTextVNode("Цены")];
+				}),
+				_: 1
+			}, _parent));
+			_push(`</nav><a class="footer-phone"${ssrRenderAttr("href", `tel:${("site" in _ctx ? _ctx.site : unref(site)).phone}`)}>${ssrInterpolate(("site" in _ctx ? _ctx.site : unref(site)).phoneLabel)}</a></footer><!--]-->`);
+		};
+	}
+});
+//#endregion
+//#region app/layouts/default.vue
+var _sfc_setup = default_vue_vue_type_script_setup_true_lang_default.setup;
+default_vue_vue_type_script_setup_true_lang_default.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("layouts/default.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+var default_default = default_vue_vue_type_script_setup_true_lang_default;
+
+export { default_default as default };;globalThis.__timing__.logEnd('Load chunks/build/default-CJH_v7UH');
+//# sourceMappingURL=default-CJH_v7UH.mjs.map

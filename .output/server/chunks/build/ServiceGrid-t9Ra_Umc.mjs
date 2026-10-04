@@ -1,0 +1,69 @@
+globalThis.__timing__.logStart('Load chunks/build/ServiceGrid-t9Ra_Umc');import { N as NuxtLink } from './nuxt-link-BJ9rYYDi.mjs';
+import { defineComponent, mergeProps, unref, createVNode, resolveDynamicComponent, withCtx, createTextVNode, toDisplayString, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderComponent } from 'vue/server-renderer';
+import { i as imageSize } from '../_/services.mjs';
+
+//#region app/components/ServiceGrid.vue?vue&type=script&setup=true&lang.ts
+var ServiceGrid_vue_vue_type_script_setup_true_lang_default = /*@__PURE__*/ defineComponent({
+	__name: "ServiceGrid",
+	__ssrInlineRender: true,
+	props: {
+		items: {},
+		headingTag: {}
+	},
+	setup(__props) {
+		return (_ctx, _push, _parent, _attrs) => {
+			const _component_NuxtLink = NuxtLink;
+			_push(`<div${ssrRenderAttrs(mergeProps({ class: "service-grid" }, _attrs))}><!--[-->`);
+			ssrRenderList(__props.items, (service, index) => {
+				_push(`<article class="${ssrRenderClass([{ "service-card-featured": index === 0 }, "service-card"])}"><img${ssrRenderAttrs(mergeProps({
+					src: service.image,
+					alt: service.imageAlt,
+					style: service.imagePosition ? { objectPosition: service.imagePosition } : void 0
+				}, { ref_for: true }, ("imageSize" in _ctx ? _ctx.imageSize : unref(imageSize))(service.image), { loading: "lazy" }))}><span>${ssrInterpolate(String(index + 1).padStart(2, "0"))}</span>`);
+				ssrRenderVNode(_push, createVNode(resolveDynamicComponent(__props.headingTag ?? "h3"), { class: "service-card-title" }, {
+					default: withCtx((_, _push, _parent, _scopeId) => {
+						if (_push) _push(ssrRenderComponent(_component_NuxtLink, { to: `/uslugi/${service.slug}` }, {
+							default: withCtx((_, _push, _parent, _scopeId) => {
+								if (_push) _push(`${ssrInterpolate(service.title)}`);
+								else return [createTextVNode(toDisplayString(service.title), 1)];
+							}),
+							_: 2
+						}, _parent, _scopeId));
+						else return [createVNode(_component_NuxtLink, { to: `/uslugi/${service.slug}` }, {
+							default: withCtx(() => [createTextVNode(toDisplayString(service.title), 1)]),
+							_: 2
+						}, 1032, ["to"])];
+					}),
+					_: 2
+				}), _parent);
+				_push(`<p>${ssrInterpolate(service.short)}</p>`);
+				_push(ssrRenderComponent(_component_NuxtLink, {
+					class: "card-link",
+					to: `/uslugi/${service.slug}`,
+					"aria-label": `Подробнее: ${service.title}`
+				}, {
+					default: withCtx((_, _push, _parent, _scopeId) => {
+						if (_push) _push(` Подробнее `);
+						else return [createTextVNode(" Подробнее ")];
+					}),
+					_: 2
+				}, _parent));
+				_push(`</article>`);
+			});
+			_push(`<!--]--></div>`);
+		};
+	}
+});
+//#endregion
+//#region app/components/ServiceGrid.vue
+var _sfc_setup = ServiceGrid_vue_vue_type_script_setup_true_lang_default.setup;
+ServiceGrid_vue_vue_type_script_setup_true_lang_default.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/ServiceGrid.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+var ServiceGrid_default = Object.assign(ServiceGrid_vue_vue_type_script_setup_true_lang_default, { __name: "ServiceGrid" });
+
+export { ServiceGrid_default as S };;globalThis.__timing__.logEnd('Load chunks/build/ServiceGrid-t9Ra_Umc');
+//# sourceMappingURL=ServiceGrid-t9Ra_Umc.mjs.map

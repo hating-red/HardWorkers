@@ -1,0 +1,37 @@
+globalThis.__timing__.logStart('Load chunks/build/LocalSeo-Ct1fzu8Y');import { defineComponent, mergeProps, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrInterpolate, ssrRenderList } from 'vue/server-renderer';
+
+//#region app/components/LocalSeo.vue?vue&type=script&setup=true&lang.ts
+var LocalSeo_vue_vue_type_script_setup_true_lang_default = /*@__PURE__*/ defineComponent({
+	__name: "LocalSeo",
+	__ssrInlineRender: true,
+	props: {
+		title: {},
+		text: {},
+		points: {}
+	},
+	setup(__props) {
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(`<section${ssrRenderAttrs(mergeProps({
+				class: "section split local-seo",
+				"aria-labelledby": "local-seo-title"
+			}, _attrs))}><div><p class="eyebrow">Работаем по Перми</p><h2 id="local-seo-title">${ssrInterpolate(__props.title)}</h2><p>${ssrInterpolate(__props.text)}</p></div><ul class="check-list check-list-plain"><!--[-->`);
+			ssrRenderList(__props.points, (point) => {
+				_push(`<li>${ssrInterpolate(point)}</li>`);
+			});
+			_push(`<!--]--></ul></section>`);
+		};
+	}
+});
+//#endregion
+//#region app/components/LocalSeo.vue
+var _sfc_setup = LocalSeo_vue_vue_type_script_setup_true_lang_default.setup;
+LocalSeo_vue_vue_type_script_setup_true_lang_default.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/LocalSeo.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+var LocalSeo_default = Object.assign(LocalSeo_vue_vue_type_script_setup_true_lang_default, { __name: "LocalSeo" });
+
+export { LocalSeo_default as L };;globalThis.__timing__.logEnd('Load chunks/build/LocalSeo-Ct1fzu8Y');
+//# sourceMappingURL=LocalSeo-Ct1fzu8Y.mjs.map
