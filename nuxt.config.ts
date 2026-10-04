@@ -1,0 +1,37 @@
+export default defineNuxtConfig({
+  compatibilityDate: "2025-07-15",
+  css: ["@fontsource-variable/onest", "~/assets/css/main.css"],
+
+  runtimeConfig: {
+    public: {
+      // Переопределяется через NUXT_PUBLIC_SITE_URL
+      siteUrl: "https://example.com",
+      // NUXT_PUBLIC_YANDEX_VERIFICATION, NUXT_PUBLIC_GOOGLE_VERIFICATION, NUXT_PUBLIC_METRIKA_ID
+      yandexVerification: "",
+      googleVerification: "",
+      metrikaId: "",
+    },
+  },
+
+  app: {
+    head: {
+      htmlAttrs: { lang: "ru" },
+      meta: [{ name: "format-detection", content: "telephone=no" }],
+      link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+    },
+  },
+
+  // Страницы услуг статичны: отдаем готовый HTML и при `nuxt build`, и при `nuxt generate`
+  routeRules: {
+    "/": { prerender: true },
+    "/uslugi/**": { prerender: true },
+    "/ceny": { prerender: true },
+  },
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ["/sitemap.xml", "/robots.txt"],
+    },
+  },
+});

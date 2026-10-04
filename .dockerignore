@@ -6,3 +6,8 @@ node_modules
 .cache
 dist
 .env
+.git
+.gitignore
+Dockerfile
+npm-debug.log*
+*.log
