@@ -70,7 +70,6 @@ useHead({
         Цены — как в наших профилях на
         <a class="text-link" :href="site.profiUrl" target="_blank" rel="noopener">Профи.ру</a> и
         <a class="text-link" :href="site.avitoUrl" target="_blank" rel="noopener">Авито</a>.
-        Точную стоимость назовем после уточнения адресов, этажей и объема.
         <NuxtLink class="text-link" to="/ceny">Все цены</NuxtLink>
       </p>
     </div>
@@ -88,12 +87,13 @@ useHead({
         </tr>
       </tbody>
     </table>
+    <CallCta title="Посчитаем точную цену по телефону" text="Расскажите, что и куда везти, — назовем до выезда." />
   </section>
 
   <section class="band band-stacked">
     <div>
       <p class="eyebrow">Как работаем</p>
-      <h2>От заявки до результата</h2>
+      <h2>От заявки до оплаты</h2>
     </div>
     <ol class="steps">
       <li v-for="(step, index) in workSteps" :key="step.title" class="step-card">

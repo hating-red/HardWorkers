@@ -38,6 +38,7 @@ useHead({
       </p>
     </div>
     <ServiceGrid :items="services" heading-tag="h2" />
+    <CallCta title="Не нашли свою задачу в списке?" text="Позвоните — подскажем и назовем цену." />
   </section>
 
   <ReviewsBlock />

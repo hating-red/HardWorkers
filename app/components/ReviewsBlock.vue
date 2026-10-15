@@ -10,28 +10,23 @@ const { avito, profi } = platformStats;
     <div class="section-head">
       <p class="eyebrow">Отзывы</p>
       <h2 id="reviews-title">Что говорят клиенты</h2>
-      <p>
-        На Авито — рейтинг {{ avito.rating }} и {{ avito.reviewCount }} отзывов, из них
-        {{ avito.clientReviewsLabel }} от клиентов. На Профи.ру — рейтинг {{ profi.rating }}.
-        Ниже — несколько отзывов дословно, остальные можно прочитать на площадках.
-      </p>
     </div>
     <ul class="stats">
       <li>
         <strong>{{ avito.rating }}</strong>
-        <span>рейтинг на Авито, {{ avito.badges }}</span>
+        <span>рейтинг на Авито и Профи.ру</span>
       </li>
       <li>
-        <strong>{{ avito.reviewCount }}</strong>
-        <span>отзывов на Авито, {{ avito.fiveStarCount }} из них — с оценкой 5</span>
+        <strong>{{ avito.reviewCountLabel }}</strong>
+        <span>отзывов на Авито</span>
       </li>
       <li>
         <strong>с {{ avito.sinceYear }}</strong>
-        <span>года на Авито, на Профи.ру — с {{ profi.since }}</span>
+        <span>года работаем на Авито</span>
       </li>
       <li>
         <strong>24/7</strong>
-        <span>на связи круглосуточно, без праздников</span>
+        <span>без выходных и праздников</span>
       </li>
     </ul>
     <div class="testimonial-grid">
@@ -48,17 +43,16 @@ const { avito, profi } = platformStats;
       </article>
     </div>
     <div class="review-sources">
-      <p>Остальные отзывы — на площадках:</p>
+      <p>Все отзывы:</p>
       <a class="platform-link" :href="site.avitoUrl" target="_blank" rel="noopener">
         <strong>Авито</strong>
         <span class="platform-rating"><span aria-hidden="true">★</span> {{ avito.rating }}</span>
-        <span>{{ avito.reviewCount }} отзывов</span>
       </a>
       <a class="platform-link" :href="site.profiUrl" target="_blank" rel="noopener">
         <strong>Профи.ру</strong>
         <span class="platform-rating"><span aria-hidden="true">★</span> {{ profi.rating }}</span>
-        <span>{{ profi.reviewCount }} отзыва</span>
       </a>
+      <a class="btn btn-primary review-call" :href="`tel:${site.phone}`">Позвонить</a>
     </div>
   </section>
 </template>

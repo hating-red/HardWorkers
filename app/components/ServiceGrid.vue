@@ -17,7 +17,6 @@ defineProps<{ items: Service[]; headingTag?: "h2" | "h3" }>();
         v-bind="imageSize(service.image)"
         loading="lazy"
       />
-      <span>{{ String(index + 1).padStart(2, "0") }}</span>
       <component :is="headingTag ?? 'h3'" class="service-card-title">
         <NuxtLink :to="`/uslugi/${service.slug}`">{{ service.title }}</NuxtLink>
       </component>
