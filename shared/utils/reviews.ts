@@ -130,16 +130,11 @@ export const reviews: Review[] = [
 export const platformStats = {
   avito: {
     rating: "5,0",
-    reviewCount: 358,
-    fiveStarCount: 354,
-    clientReviewsLabel: "более 300",
+    reviewCountLabel: "от\u00A0350",
     sinceYear: 2012,
-    badges: "данные подтверждены, компания проверена",
   },
   profi: {
     rating: "5,0",
-    reviewCount: 4,
-    since: "июля 2022",
   },
 };
 
