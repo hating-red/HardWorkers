@@ -43,7 +43,7 @@ export const site = {
   avitoUrl: "https://www.avito.ru/brands/i9397909",
   // Иконка в шапке показывается, только если ссылка заполнена
   messengers: [
-    { id: "max", label: "Макс", url: "" },
+    { id: "max", label: "Макс", url: "https://web.max.ru/292860750" },
     { id: "vk", label: "ВКонтакте", url: "" },
     { id: "telegram", label: "Телеграм", url: "https://t.me/Stanislav_Matveev" },
   ],
