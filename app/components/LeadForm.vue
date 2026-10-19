@@ -42,12 +42,12 @@ async function submit() {
     <div>
       <p class="eyebrow">Заявка</p>
       <h2>Расскажите, что нужно перевезти</h2>
-      <p>Мы уточним адреса, этажи, объем вещей, количество грузчиков и предложим ближайшее время.</p>
+      <p>Уточним адреса, этажи и объем, предложим ближайшее время.</p>
     </div>
     <form class="lead-form" novalidate @submit.prevent="submit">
       <label>
         Имя
-        <input v-model="name" name="name" type="text" placeholder="Например, Анна…" autocomplete="name" />
+        <input v-model="name" name="name" type="text" placeholder="Анна" autocomplete="name" />
       </label>
       <label>
         Телефон
@@ -57,7 +57,7 @@ async function submit() {
           name="phone"
           type="tel"
           inputmode="tel"
-          placeholder="+7 964 123-45-67…"
+          placeholder="+7 964 123-45-67"
           autocomplete="tel"
           required
           :aria-invalid="!!phoneError"

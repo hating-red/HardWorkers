@@ -42,7 +42,10 @@ useSeoMeta({
       <NuxtLink to="/#reviews">Отзывы</NuxtLink>
       <a href="#contacts">Контакты</a>
     </nav>
-    <a class="phone-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
+    <div class="topbar-contacts">
+      <MessengerLinks />
+      <a class="phone-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
+    </div>
   </header>
 
   <main id="top" tabindex="-1">
