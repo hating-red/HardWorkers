@@ -1,27 +1,43 @@
+import { site, services, generalFaq, formatPriceFrom } from "../../shared/utils/services.ts";
+import type { Service, ServiceFaq } from "../../shared/utils/services.ts";
+import { indexablePages } from "../../shared/utils/seo.ts";
+
 const address = {
   "@type": "PostalAddress",
   streetAddress: site.street,
-  addressLocality: "Пермь",
-  addressRegion: "Пермский край",
+  addressLocality: site.city,
+  addressRegion: site.region,
   addressCountry: "RU",
 };
 
-const areaServed = { "@type": "City", name: "Пермь" };
+const areaServed = [
+  { "@type": "City", name: site.city },
+  { "@type": "AdministrativeArea", name: site.region },
+];
 
 const businessId = (siteUrl: string) => `${siteUrl}/#business`;
 const websiteId = (siteUrl: string) => `${siteUrl}/#website`;
 
-const createBusinessSchema = (siteUrl: string, description: string) => ({
+const createBusinessSchema = (siteUrl: string) => ({
   "@type": "MovingCompany",
   "@id": businessId(siteUrl),
   name: site.name,
   url: `${siteUrl}/`,
   telephone: site.phone,
   image: `${siteUrl}/images/1.png`,
+  logo: { "@type": "ImageObject", "@id": `${siteUrl}/#logo`, url: `${siteUrl}/logo.svg` },
   priceRange: formatPriceFrom(site.priceFrom),
-  description,
+  description: site.description,
   address,
   areaServed,
+  openingHours: "Mo-Su 00:00-23:59",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phone,
+    contactType: "customer service",
+    availableLanguage: "Russian",
+    areaServed,
+  },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -30,15 +46,6 @@ const createBusinessSchema = (siteUrl: string, description: string) => ({
   },
   paymentAccepted: "Наличные, безналичный расчет",
   sameAs: [site.profiUrl, site.avitoUrl],
-  review: reviews.map((review) => ({
-    "@type": "Review",
-    author: { "@type": "Person", name: review.author },
-    datePublished: review.date,
-    reviewBody: review.text.replace(/\n/g, " "),
-    reviewRating: { "@type": "Rating", ratingValue: review.rating, bestRating: 5, worstRating: 1 },
-    publisher: { "@type": "Organization", name: review.source },
-    url: review.sourceUrl,
-  })),
 });
 
 const createWebsiteSchema = (siteUrl: string) => ({
@@ -48,6 +55,28 @@ const createWebsiteSchema = (siteUrl: string) => ({
   url: `${siteUrl}/`,
   inLanguage: "ru-RU",
   publisher: { "@id": businessId(siteUrl) },
+  hasPart: indexablePages().filter((page) => page.path !== "/").map((page) => ({
+    "@type": "WebPage",
+    "@id": `${siteUrl}${page.path}#webpage`,
+    name: page.title,
+    url: `${siteUrl}${page.path}`,
+  })),
+});
+
+const createNavigationSchema = (siteUrl: string) => ({
+  "@type": "ItemList",
+  "@id": `${siteUrl}/#navigation`,
+  name: "Разделы сайта",
+  itemListElement: indexablePages().filter((page) => page.path !== "/").map((page, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "SiteNavigationElement",
+      "@id": `${siteUrl}${page.path}#navigation`,
+      name: page.title,
+      url: `${siteUrl}${page.path}`,
+    },
+  })),
 });
 
 const createBreadcrumbSchema = (url: string, items: { name: string; item: string }[]) => ({
@@ -125,7 +154,7 @@ export const createHomePageSchema = (siteUrl: string, seo: { title: string; desc
   "@context": "https://schema.org",
   "@graph": [
     {
-      ...createBusinessSchema(siteUrl, seo.description),
+      ...createBusinessSchema(siteUrl),
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: `Услуги ${site.name}`,
@@ -142,6 +171,7 @@ export const createHomePageSchema = (siteUrl: string, seo: { title: string; desc
       },
     },
     createWebsiteSchema(siteUrl),
+    createNavigationSchema(siteUrl),
     createWebPageSchema(siteUrl, `${siteUrl}/`, seo, businessId(siteUrl), false),
     createServiceListSchema(siteUrl, `${siteUrl}/#services`),
     createFaqSchema(`${siteUrl}/`, generalFaq),
@@ -154,9 +184,13 @@ export const createServicesPageSchema = (siteUrl: string, seo: { title: string; 
   return {
     "@context": "https://schema.org",
     "@graph": [
-      createBusinessSchema(siteUrl, seo.description),
+      createBusinessSchema(siteUrl),
       createWebsiteSchema(siteUrl),
-      createWebPageSchema(siteUrl, url, seo, businessId(siteUrl)),
+      {
+        ...createWebPageSchema(siteUrl, url, seo, businessId(siteUrl)),
+        "@type": "CollectionPage",
+        mainEntity: { "@id": `${url}#services` },
+      },
       createServiceListSchema(siteUrl, `${url}#services`),
       createBreadcrumbSchema(url, [
         { name: "Главная", item: `${siteUrl}/` },
@@ -177,7 +211,7 @@ export const createPricePageSchema = (
     "@context": "https://schema.org",
     "@graph": [
       {
-        ...createBusinessSchema(siteUrl, seo.description),
+        ...createBusinessSchema(siteUrl),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: `Цены ${site.name}`,
@@ -210,7 +244,7 @@ export const createServicePageSchema = (siteUrl: string, service: Service) => {
     "@context": "https://schema.org",
     "@graph": [
       {
-        ...createBusinessSchema(siteUrl, service.metaDescription),
+        ...createBusinessSchema(siteUrl),
         makesOffer: { "@type": "Offer", url, itemOffered: { "@id": serviceId } },
       },
       createWebsiteSchema(siteUrl),
@@ -219,7 +253,7 @@ export const createServicePageSchema = (siteUrl: string, service: Service) => {
         "@id": serviceId,
         name: service.h1,
         serviceType: service.title,
-        description: service.local.text,
+        description: `${service.local.text} ${site.regionalTerms}`,
         url,
         image: siteUrl + service.image,
         provider: { "@id": businessId(siteUrl) },
@@ -238,6 +272,26 @@ export const createServicePageSchema = (siteUrl: string, service: Service) => {
         { name: service.title, item: url },
       ]),
       createFaqSchema(url, service.faq),
+    ],
+  };
+};
+
+export const createContactsPageSchema = (siteUrl: string, seo: { title: string; description: string }) => {
+  const url = `${siteUrl}/contacts`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      createBusinessSchema(siteUrl),
+      createWebsiteSchema(siteUrl),
+      {
+        ...createWebPageSchema(siteUrl, url, seo, businessId(siteUrl)),
+        "@type": "ContactPage",
+        mainEntity: { "@id": businessId(siteUrl) },
+      },
+      createBreadcrumbSchema(url, [
+        { name: "Главная", item: `${siteUrl}/` },
+        { name: "Контакты", item: url },
+      ]),
     ],
   };
 };

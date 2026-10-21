@@ -1,26 +1,13 @@
 <script setup lang="ts">
-const { siteUrl } = useRuntimeConfig().public;
-
 const seo = {
-  title: "Услуги: переезды, грузчики, перевозки и вывоз мусора в Перми — ТрудягиН",
-  description: `Все услуги ТрудягиН в Перми: транспортные услуги, грузчики на час, квартирные и офисные переезды, упаковка, вывоз мусора, экспедирование и эвакуатор. ${formatPriceFrom(site.priceFrom)}.`,
+  title: "Услуги грузчиков и перевозки в Перми — ТрудягиН",
+  description: "Услуги ТрудягиН в Перми и Пермском крае: грузчики, Газель, квартирные и офисные переезды, упаковка, вывоз мусора, экспедирование и эвакуатор. Работаем 24/7.",
 };
 
-useSeoMeta({
-  title: seo.title,
-  description: seo.description,
-  ogTitle: seo.title,
-  ogDescription: seo.description,
-  ogImage: `${siteUrl}/images/1.png`,
-});
-
-useHead({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify(createServicesPageSchema(siteUrl, seo)),
-    },
-  ],
+usePageSeo({
+  ...seo,
+  path: "/uslugi",
+  schema: (siteUrl) => createServicesPageSchema(siteUrl, seo),
 });
 </script>
 
@@ -35,6 +22,7 @@ useHead({
       <p class="page-lead">
         Транспорт, грузчики, переезды, упаковка, вывоз мусора и эвакуатор по всей Перми —
         {{ formatPriceFrom(site.priceFrom) }}. Работаем с физлицами и юрлицами.
+        Выезды по Пермскому краю согласуем по маршруту и времени подачи.
       </p>
     </div>
     <ServiceGrid :items="services" heading-tag="h2" />

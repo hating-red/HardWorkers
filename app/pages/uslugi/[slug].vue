@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
-const { siteUrl } = useRuntimeConfig().public;
+
+definePageMeta({ key: (route) => String(route.params.slug) });
 
 const service = services.find((item) => item.slug === route.params.slug);
 
@@ -11,21 +12,13 @@ if (!service) {
 // Шесть карточек ровно заполняют сетку 3×2; остальные услуги — по ссылке «Все услуги»
 const others = services.filter((item) => item.slug !== service.slug).slice(0, 6);
 
-useSeoMeta({
+usePageSeo({
+  path: `/uslugi/${service.slug}`,
   title: service.metaTitle,
   description: service.metaDescription,
-  ogTitle: service.metaTitle,
-  ogDescription: service.metaDescription,
-  ogImage: siteUrl + service.image,
-});
-
-useHead({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify(createServicePageSchema(siteUrl, service)),
-    },
-  ],
+  image: service.image,
+  imageAlt: service.imageAlt,
+  schema: (siteUrl) => createServicePageSchema(siteUrl, service),
 });
 </script>
 

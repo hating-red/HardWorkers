@@ -1,26 +1,17 @@
 <script setup lang="ts">
-const { siteUrl } = useRuntimeConfig().public;
-
 const seo = {
-  title: `ТрудягиН — переезды, грузчики и транспортные услуги в Перми ${formatPriceFrom(site.priceFrom)}`,
-  description: `Транспортные услуги, грузчики на час, квартирные и офисные переезды под ключ, вывоз мусора и эвакуатор в Перми. ${formatPriceFrom(site.priceFrom)}. Работаем с физлицами и юрлицами.`,
+  title: "Грузчики и переезды в Перми — ТрудягиН",
+  description: `Грузчики ${formatPriceFrom(site.priceFrom)}, квартирные и офисные переезды, Газель, вывоз мусора и эвакуатор в Перми и Пермском крае. Круглосуточно, договор и безнал.`,
 };
 
-useSeoMeta({
-  title: seo.title,
-  description: seo.description,
-  ogTitle: seo.title,
-  ogDescription: seo.description,
-  ogImage: `${siteUrl}/images/1.png`,
+usePageSeo({
+  ...seo,
+  path: "/",
+  schema: (siteUrl) => createHomePageSchema(siteUrl, seo),
 });
 
 useHead({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify(createHomePageSchema(siteUrl, seo)),
-    },
-  ],
+  meta: [{ name: "yandex-verification", content: "b022f824d2a654df" }],
 });
 </script>
 
@@ -31,7 +22,7 @@ useHead({
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="eyebrow">Работаем по Перми • круглосуточно • физлица и юрлица</p>
+      <p class="eyebrow">Пермь и Пермский край • круглосуточно</p>
       <h1>Квартирный переезд с грузчиками в Перми под ключ</h1>
       <p class="hero-copy">
         Машина, грузчики, упаковка и сборка мебели.

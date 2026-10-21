@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const route = useRoute();
-const { siteUrl, yandexVerification, googleVerification, metrikaId } = useRuntimeConfig().public;
+const { yandexVerification, googleVerification, metrikaId } = useRuntimeConfig().public;
 
 useHead({
-  link: [{ rel: "canonical", href: () => siteUrl + route.path }],
   meta: [
     { name: "theme-color", content: "#faf8f1" },
     { name: "geo.region", content: "RU-PER" },
@@ -24,7 +22,6 @@ useSeoMeta({
   ogSiteName: site.name,
   ogType: "website",
   ogLocale: "ru_RU",
-  ogUrl: () => siteUrl + route.path,
   twitterCard: "summary_large_image",
 });
 </script>
@@ -40,7 +37,7 @@ useSeoMeta({
       <NuxtLink to="/ceny">Цены</NuxtLink>
       <NuxtLink to="/#fleet">Парк</NuxtLink>
       <NuxtLink to="/#reviews">Отзывы</NuxtLink>
-      <a href="#contacts">Контакты</a>
+      <NuxtLink to="/contacts">Контакты</NuxtLink>
     </nav>
     <div class="topbar-contacts">
       <MessengerLinks />
@@ -55,14 +52,15 @@ useSeoMeta({
   <footer class="footer" id="contacts">
     <div>
       <AppLogo class="brand-logo-footer" />
-      <span>Грузовые перевозки, переезды, грузчики и эвакуатор в Перми.</span>
-      <address>{{ site.city }}, {{ site.street }} · {{ site.hours }}</address>
+      <span>Грузовые перевозки, переезды, грузчики и эвакуатор в Перми и Пермском крае.</span>
+      <address>{{ site.region }}, {{ site.city }}, {{ site.street }} · {{ site.hours }}</address>
     </div>
     <nav class="footer-nav" aria-label="Услуги">
       <NuxtLink v-for="service in services" :key="service.slug" :to="`/uslugi/${service.slug}`">
         {{ service.title }}
       </NuxtLink>
       <NuxtLink to="/ceny">Цены</NuxtLink>
+      <NuxtLink to="/contacts">Контакты</NuxtLink>
     </nav>
     <a class="footer-phone" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
   </footer>

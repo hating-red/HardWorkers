@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const { siteUrl } = useRuntimeConfig().public;
-
 const seo = {
-  title: `Цены на грузчиков, переезды и перевозки в Перми ${formatPriceFrom(site.priceFrom)} — ТрудягиН`,
-  description: `Прайс-лист ТрудягиН в Перми: грузчики ${formatPriceFrom(site.priceFrom)}, квартирные и офисные переезды, упаковка, вывоз мусора, транспортные услуги. Точную стоимость назовем до выезда.`,
+  title: "Цены на грузчиков и переезды в Перми — ТрудягиН",
+  description: `Прайс-лист ТрудягиН: грузчики ${formatPriceFrom(site.priceFrom)}, переезды, упаковка и вывоз мусора в Перми. Выезды по Пермскому краю рассчитываем по маршруту.`,
 };
 
 const priced = services.filter((service) => service.prices);
@@ -18,21 +16,10 @@ const priceFactors = [
 
 const priceFaq = generalFaq.filter((item) => /стоят|оплатить|организациями/.test(item.question));
 
-useSeoMeta({
-  title: seo.title,
-  description: seo.description,
-  ogTitle: seo.title,
-  ogDescription: seo.description,
-  ogImage: `${siteUrl}/images/1.png`,
-});
-
-useHead({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify(createPricePageSchema(siteUrl, seo, priceFaq)),
-    },
-  ],
+usePageSeo({
+  ...seo,
+  path: "/ceny",
+  schema: (siteUrl) => createPricePageSchema(siteUrl, seo, priceFaq),
 });
 </script>
 
@@ -47,6 +34,7 @@ useHead({
       <p class="page-lead">
         Грузчики, переезды и упаковка — {{ formatPriceFrom(site.priceFrom) }}.
         Точную цену называем до выезда.
+        Для поездок по Пермскому краю учитываем маршрут и расстояние.
       </p>
     </div>
 

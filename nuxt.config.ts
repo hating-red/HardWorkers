@@ -1,3 +1,9 @@
+import process from "node:process";
+import { indexablePages, isPublicSiteUrl, normalizeSiteUrl } from "./shared/utils/seo";
+import { site } from "./shared/utils/services";
+
+const siteUrl = normalizeSiteUrl(process.env.NUXT_PUBLIC_SITE_URL || site.url);
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   css: ["@fontsource-variable/onest", "~/assets/css/main.css"],
@@ -5,11 +11,22 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // Переопределяется через NUXT_PUBLIC_SITE_URL
-      siteUrl: "https://example.com",
+      siteUrl,
+      siteIndexable: true,
       // NUXT_PUBLIC_YANDEX_VERIFICATION, NUXT_PUBLIC_GOOGLE_VERIFICATION, NUXT_PUBLIC_METRIKA_ID
       yandexVerification: "",
       googleVerification: "",
       metrikaId: "",
+    },
+  },
+
+  $production: {
+    hooks: {
+      "build:before"() {
+        if (!isPublicSiteUrl(siteUrl) && process.env.NUXT_PUBLIC_SITE_INDEXABLE !== "false") {
+          throw new Error("Set NUXT_PUBLIC_SITE_URL to the production domain before building. For a private preview, set NUXT_PUBLIC_SITE_INDEXABLE=false.");
+        }
+      },
     },
   },
 
@@ -26,12 +43,15 @@ export default defineNuxtConfig({
     "/": { prerender: true },
     "/uslugi/**": { prerender: true },
     "/ceny": { prerender: true },
+    "/contacts": { prerender: true },
+    "/api/**": { headers: { "X-Robots-Tag": "noindex, nofollow" } },
   },
 
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ["/sitemap.xml", "/robots.txt"],
+      failOnError: true,
+      routes: [...indexablePages().map((page) => page.path), "/sitemap.xml", "/robots.txt"],
     },
   },
 });
