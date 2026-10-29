@@ -29,8 +29,11 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
+# API мессенджера MAX работает на сертификате Минцифры, которого нет в списке Node
+ENV NODE_EXTRA_CA_CERTS=/app/certs/russian_trusted_root_ca.pem
 
 COPY --from=builder /app/.output ./.output
+COPY server/certs/russian_trusted_root_ca.pem ./certs/
 
 EXPOSE 3000
 

@@ -4,9 +4,16 @@ const props = defineProps<{ topic?: string }>();
 const name = ref("");
 const phone = ref("");
 const task = ref("");
-const note = ref("Форма подготовит текст обращения. Отправку подключим после выбора канала.");
+const consent = ref(false);
+const policy = ref(false);
+// Ловушка для ботов: человек это поле не видит и не заполняет
+const website = ref("");
+
+const status = ref<"idle" | "sending" | "sent" | "failed">("idle");
 const phoneError = ref("");
+const consentError = ref("");
 const phoneInput = ref<HTMLInputElement>();
+const consentInput = ref<HTMLInputElement>();
 
 async function submit() {
   if (phone.value.replace(/\D/g, "").length < 10) {
@@ -16,23 +23,32 @@ async function submit() {
   }
   phoneError.value = "";
 
-  const message = [
-    `Заявка с сайта ${site.name}`,
-    props.topic ? `Услуга: ${props.topic}` : null,
-    name.value.trim() ? `Имя: ${name.value.trim()}` : null,
-    `Телефон: ${phone.value.trim()}`,
-    task.value.trim() ? `Задача: ${task.value.trim()}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  if (!consent.value || !policy.value) {
+    consentError.value = "Отметьте оба пункта, чтобы отправить заявку";
+    consentInput.value?.focus();
+    return;
+  }
+  consentError.value = "";
 
+  status.value = "sending";
   try {
-    await navigator.clipboard.writeText(message);
-    note.value =
-      "Текст заявки скопирован. Теперь можно отправить его в Telegram или мессенджер клиенту.";
+    await $fetch("/api/lead", {
+      method: "POST",
+      body: {
+        topic: props.topic,
+        name: name.value,
+        phone: phone.value,
+        task: task.value,
+        consent: true,
+        website: website.value,
+      },
+    });
+    status.value = "sent";
+    name.value = "";
+    phone.value = "";
+    task.value = "";
   } catch {
-    note.value =
-      "Заявка подготовлена. Подключим отправку в Telegram, WhatsApp или CRM отдельным шагом.";
+    status.value = "failed";
   }
 }
 </script>
@@ -47,7 +63,7 @@ async function submit() {
     <form class="lead-form" novalidate @submit.prevent="submit">
       <label>
         Имя
-        <input v-model="name" name="name" type="text" placeholder="Анна" autocomplete="name" />
+        <input v-model="name" name="name" type="text" placeholder="Анна" autocomplete="name" maxlength="100" />
       </label>
       <label>
         Телефон
@@ -59,6 +75,7 @@ async function submit() {
           inputmode="tel"
           placeholder="+7 964 123-45-67"
           autocomplete="tel"
+          maxlength="40"
           required
           :aria-invalid="!!phoneError"
           aria-describedby="phone-error"
@@ -67,10 +84,51 @@ async function submit() {
       </label>
       <label>
         Что нужно
-        <textarea v-model="task" name="task" rows="4" placeholder="Переезд, грузчики, эвакуатор, упаковка…" autocomplete="off"></textarea>
+        <textarea v-model="task" name="task" rows="4" placeholder="Переезд, грузчики, эвакуатор, упаковка…" autocomplete="off" maxlength="2000"></textarea>
       </label>
-      <button class="btn btn-primary" type="submit">Подготовить заявку</button>
-      <p class="form-note" aria-live="polite">{{ note }}</p>
+      <div class="form-trap" aria-hidden="true">
+        <label>
+          Сайт
+          <input v-model="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </label>
+      </div>
+      <label class="consent">
+        <input
+          ref="consentInput"
+          v-model="consent"
+          type="checkbox"
+          required
+          :aria-invalid="!!consentError && !consent"
+          aria-describedby="consent-error"
+        />
+        <span>
+          Даю <NuxtLink class="text-link" to="/soglasie" target="_blank">согласие на обработку персональных данных</NuxtLink>
+        </span>
+      </label>
+      <label class="consent">
+        <input
+          v-model="policy"
+          type="checkbox"
+          required
+          :aria-invalid="!!consentError && !policy"
+          aria-describedby="consent-error"
+        />
+        <span>
+          Ознакомлен с <NuxtLink class="text-link" to="/politika" target="_blank">политикой обработки персональных данных</NuxtLink>
+        </span>
+      </label>
+      <span id="consent-error" class="field-error" role="alert">{{ consentError }}</span>
+      <button class="btn btn-primary" type="submit" :disabled="status === 'sending'">
+        {{ status === "sending" ? "Отправляем…" : "Отправить заявку" }}
+      </button>
+      <p class="form-note" aria-live="polite">
+        <template v-if="status === 'sent'">Заявка отправлена. Скоро перезвоним.</template>
+        <template v-else-if="status === 'failed'">
+          Не получилось отправить заявку. Позвоните нам:
+          <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
+        </template>
+        <template v-else>Перезвоним, уточним детали и назовем цену.</template>
+      </p>
     </form>
   </section>
 </template>

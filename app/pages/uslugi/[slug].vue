@@ -59,12 +59,7 @@ usePageSeo({
     <div class="section-head">
       <p class="eyebrow">Цены</p>
       <h2 id="prices-title">Сколько стоит: {{ service.title.toLowerCase() }} в Перми</h2>
-      <p>
-        Цены — как в наших профилях на
-        <a class="text-link" :href="site.profiUrl" target="_blank" rel="noopener">Профи.ру</a> и
-        <a class="text-link" :href="site.avitoUrl" target="_blank" rel="noopener">Авито</a>.
-        <NuxtLink class="text-link" to="/ceny">Все цены</NuxtLink>
-      </p>
+      <p><NuxtLink class="text-link" to="/ceny">Все цены</NuxtLink></p>
     </div>
     <table class="price-table">
       <thead>

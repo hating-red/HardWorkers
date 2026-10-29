@@ -54,6 +54,10 @@ useSeoMeta({
       <AppLogo class="brand-logo-footer" />
       <span>Грузовые перевозки, переезды, грузчики и эвакуатор в Перми и Пермском крае.</span>
       <address>{{ site.region }}, {{ site.city }}, {{ site.street }} · {{ site.hours }}</address>
+      <p class="footer-legal">
+        <NuxtLink to="/politika">Политика обработки персональных данных</NuxtLink>
+        <NuxtLink to="/soglasie">Согласие на обработку данных</NuxtLink>
+      </p>
     </div>
     <nav class="footer-nav" aria-label="Услуги">
       <NuxtLink v-for="service in services" :key="service.slug" :to="`/uslugi/${service.slug}`">

@@ -32,7 +32,7 @@ usePageSeo({
     <div class="section-head">
       <h1>Цены на услуги в Перми</h1>
       <p class="page-lead">
-        Грузчики, переезды и упаковка — {{ formatPriceFrom(site.priceFrom) }}.
+        Грузчики и упаковка — {{ formatPriceFrom(site.priceFrom) }}.
         Точную цену называем до выезда.
         Для поездок по Пермскому краю учитываем маршрут и расстояние.
       </p>
@@ -89,10 +89,7 @@ usePageSeo({
     </div>
 
     <p class="price-note">
-      Цены — как в наших профилях на
-      <a class="text-link" :href="site.profiUrl" target="_blank" rel="noopener">Профи.ру</a> и
-      <a class="text-link" :href="site.avitoUrl" target="_blank" rel="noopener">Авито</a>.
-      Оплата наличным или безналичным расчетом; для юрлиц — договор, счет и закрывающие документы.
+      Оплата наличным или безналичным расчетом; для юрлиц — договор, счет, закрывающие документы и ЭТрН.
     </p>
   </section>
 

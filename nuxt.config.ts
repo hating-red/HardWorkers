@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   css: ["@fontsource-variable/onest", "~/assets/css/main.css"],
 
   runtimeConfig: {
+    // Отправка заявок в MAX, задаются при запуске: NUXT_MAX_BOT_TOKEN и NUXT_MAX_USER_ID (личный чат с ботом)
+    // или NUXT_MAX_CHAT_ID (групповой чат, куда добавлен бот)
+    maxBotToken: "",
+    maxUserId: "",
+    maxChatId: "",
     public: {
       // Переопределяется через NUXT_PUBLIC_SITE_URL
       siteUrl,
@@ -44,6 +49,8 @@ export default defineNuxtConfig({
     "/uslugi/**": { prerender: true },
     "/ceny": { prerender: true },
     "/contacts": { prerender: true },
+    "/politika": { prerender: true },
+    "/soglasie": { prerender: true },
     "/api/**": { headers: { "X-Robots-Tag": "noindex, nofollow" } },
   },
 
