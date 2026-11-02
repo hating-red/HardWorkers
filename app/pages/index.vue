@@ -18,7 +18,7 @@ useHead({
 <template>
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
-      <img src="/images/1.png" alt="" width="1672" height="941" fetchpriority="high" />
+      <img src="/images/1.webp" alt="" width="1672" height="941" fetchpriority="high" />
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -56,7 +56,7 @@ useHead({
 
   <section class="section fleet" id="fleet" aria-labelledby="fleet-title">
     <div class="fleet-media">
-      <img src="/images/5.png" alt="Парк грузовых Газелей ТрудягиН" width="1672" height="941" loading="lazy" />
+      <img src="/images/5.webp" alt="Парк грузовых Газелей ТрудягиН" width="1672" height="941" loading="lazy" />
       <p class="fleet-badge">
         <strong>24/7</strong>
         <span>срочная подача машины</span>

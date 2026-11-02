@@ -130,7 +130,7 @@ export const reviews: Review[] = [
 export const platformStats = {
   avito: {
     rating: "5,0",
-    reviewCountLabel: "более\u00A0350",
+    reviewCount: 350,
     sinceYear: 2012,
   },
   profi: {

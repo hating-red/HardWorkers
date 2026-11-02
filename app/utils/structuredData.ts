@@ -24,7 +24,7 @@ const createBusinessSchema = (siteUrl: string) => ({
   name: site.name,
   url: `${siteUrl}/`,
   telephone: site.phone,
-  image: `${siteUrl}/images/1.png`,
+  image: `${siteUrl}/images/1.webp`,
   logo: { "@type": "ImageObject", "@id": `${siteUrl}/#logo`, url: `${siteUrl}/logo.svg` },
   priceRange: formatPriceFrom(site.priceFrom),
   description: site.description,

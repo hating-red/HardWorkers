@@ -49,7 +49,7 @@ const mapUrl = `https://yandex.ru/maps/?text=${encodeURIComponent(`${site.city},
         </div>
         <div class="contact-messengers"><MessengerLinks /></div>
       </div>
-      <img src="/images/5.png" alt="Газели ТрудягиН для переездов и перевозок по Перми и Пермскому краю"
+      <img src="/images/5.webp" alt="Газели ТрудягиН для переездов и перевозок по Перми и Пермскому краю"
         width="1672" height="941" class="contact-image" />
     </div>
   </section>

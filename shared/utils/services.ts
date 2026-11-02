@@ -84,7 +84,7 @@ const FROM_PER_KM = formatPriceFrom(40, "/км");
 const ON_REQUEST = "по запросу";
 
 // Размеры исходных файлов — для width/height у <img>, чтобы верстка не прыгала при загрузке
-const wideImages = ["/images/1.png", "/images/5.png"];
+const wideImages = ["/images/1.webp", "/images/5.webp"];
 
 export const imageSize = (src: string) =>
   wideImages.includes(src) ? { width: 1672, height: 941 } : { width: 1448, height: 1086 };
@@ -156,7 +156,7 @@ export const services: Service[] = [
       "Грузоперевозки на Газели по Перми и Пермскому краю: мебель, техника и стройматериалы. Машина с грузчиками, наличный и безналичный расчет. Цена до выезда.",
     short: "Газели для переездов, доставки и перевозки вещей, мебели, техники и стройматериалов.",
     lead: "Подадим грузовую Газель под объем и задачу: переезд, доставка, перевозка мебели, техники, стройматериалов и коммерческих грузов.",
-    image: "/images/5.png",
+    image: "/images/5.webp",
     imageAlt: "Парк грузовых Газелей для перевозок",
     popular: true,
     priceFrom: GAZELLE_PRICE,
@@ -211,7 +211,7 @@ export const services: Service[] = [
     short:
       "Бригады на час или смену для погрузки, разгрузки, подъема на этаж, работ на складе и объекте.",
     lead: "Бригады на час или смену: погрузка, разгрузка, подъем на этаж, работы на складе и объекте.",
-    image: "/images/3.png",
+    image: "/images/3.webp",
     imageAlt: "Грузчики разгружают вещи из Газели",
     imagePosition: "center top",
     popular: true,
@@ -274,7 +274,7 @@ export const services: Service[] = [
     short:
       "Перевезем вещи, технику, коробки и мебель. Разберем, упакуем и соберем на новом адресе.",
     lead: "Перевезем вещи, технику, коробки и мебель. Возьмем на себя машину, бригаду, упаковку и сборку мебели на новом адресе.",
-    image: "/images/2.png",
+    image: "/images/2.webp",
     imageAlt: "Квартирный переезд с грузчиками",
     imagePosition: "center 22%",
     popular: true,
@@ -333,7 +333,7 @@ export const services: Service[] = [
     short:
       "Перевезем рабочие места, документы, оборудование и мебель — по зонам и кабинетам.",
     lead: "Перевезем рабочие места, документы, оборудование и мебель. По договору, с оплатой по расчетному счету.",
-    image: "/images/4.png",
+    image: "/images/4.webp",
     imageAlt: "Офисный переезд с упаковкой мебели и техники",
     imagePosition: "center 22%",
     priceFrom: MOVE_PRICE,
@@ -391,7 +391,7 @@ export const services: Service[] = [
     short:
       "Работаем с материалами клиента или привозим свои: пленка, коробки, скотч, защитная упаковка.",
     lead: "Упакуем мебель, технику и вещи перед перевозкой. Работаем с вашими материалами или привозим свои.",
-    image: "/images/7.png",
+    image: "/images/7.webp",
     imageAlt: "Упаковка мебели перед переездом",
     imagePosition: "center top",
     priceFrom: site.priceFrom,
@@ -438,7 +438,7 @@ export const services: Service[] = [
     short:
       "Вынесем, погрузим и вывезем строительный мусор, ванны, радиаторы, металлолом и макулатуру.",
     lead: "Вынесем, погрузим и вывезем мусор Газелью с грузчиками: строительный мусор, ванны, радиаторы, металлолом, макулатуру.",
-    image: "/images/3.png",
+    image: "/images/3.webp",
     imageAlt: "Грузчики работают у грузовой Газели",
     imagePosition: "center top",
     priceLabel: FROM_GARBAGE,
@@ -493,7 +493,7 @@ export const services: Service[] = [
     short:
       "Сопроводим груз, проверим адреса и проконтролируем доставку до получателя.",
     lead: "Сопроводим груз, проверим адреса, проследим за погрузкой и доставим получателю.",
-    image: "/images/5.png",
+    image: "/images/5.webp",
     imageAlt: "Парк грузовых Газелей для перевозок",
     includes: [
       "Сопровождение груза в пути",
@@ -538,7 +538,7 @@ export const services: Service[] = [
     short:
       "Перевезем автомобиль или технику по Перми.",
     lead: "Перевезем автомобиль или технику. Назовите адреса — посчитаем по телефону.",
-    image: "/images/6.png",
+    image: "/images/6.webp",
     imageAlt: "Эвакуатор загружает автомобиль",
     includes: [
       "Перевозка легковых автомобилей",

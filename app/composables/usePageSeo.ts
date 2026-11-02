@@ -11,7 +11,7 @@ export const usePageSeo = (page: PageSeo) => {
   const config = useRuntimeConfig().public;
   const baseUrl = normalizeSiteUrl(config.siteUrl);
   const canonical = baseUrl + page.path;
-  const imagePath = page.image || "/images/1.png";
+  const imagePath = page.image || "/images/1.webp";
   const imageUrl = baseUrl + imagePath;
   const imageAlt = page.imageAlt || `${site.name}: переезды и грузчики в Перми`;
   const dimensions = imageSize(imagePath);
@@ -29,7 +29,7 @@ export const usePageSeo = (page: PageSeo) => {
     ogImageAlt: imageAlt,
     ogImageWidth: dimensions.width,
     ogImageHeight: dimensions.height,
-    ogImageType: "image/png",
+    ogImageType: "image/webp",
     twitterCard: "summary_large_image",
     twitterTitle: page.title,
     twitterDescription: page.description,

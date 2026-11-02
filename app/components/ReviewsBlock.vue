@@ -17,11 +17,11 @@ const { avito, profi } = platformStats;
         <span>рейтинг на Авито и Профи.ру</span>
       </li>
       <li>
-        <strong>{{ avito.reviewCountLabel }}</strong>
+        <strong><small>более</small>&nbsp;{{ avito.reviewCount }}</strong>
         <span>отзывов на Авито</span>
       </li>
       <li>
-        <strong>с {{ avito.sinceYear }}</strong>
+        <strong><small>с</small>&nbsp;{{ avito.sinceYear }}</strong>
         <span>года работаем на Авито</span>
       </li>
       <li>

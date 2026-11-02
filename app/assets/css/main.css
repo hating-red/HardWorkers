@@ -824,6 +824,11 @@ textarea:focus {
   line-height: 1;
 }
 
+.stats strong small {
+  font-size: 0.5em;
+  font-weight: 800;
+}
+
 .stats span {
   color: rgba(22, 21, 15, 0.8);
   font-size: 14px;
@@ -1782,6 +1787,26 @@ input[aria-invalid="true"] {
 
   .steps {
     grid-template-columns: 1fr;
+  }
+
+  .stats li {
+    padding: 18px 16px;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 12px 14px;
+  }
+
+  /* Длинные слова вроде «крупногабаритных» иначе растягивают таблицу шире экрана */
+  .price-table tbody th {
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
+  /* Две плашки в ряд на узком экране: крупная цифра должна влезть в карточку */
+  .stats strong {
+    font-size: clamp(24px, 8vw, 34px);
   }
 
   .fleet-specs {
