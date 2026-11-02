@@ -26,10 +26,10 @@ useHead({ link: [{ key: "canonical", rel: "canonical", href: `${siteUrl}/politik
       от 27.07.2006 № 152-ФЗ «О персональных данных».
     </p>
     <p>
-      Оператор персональных данных — {{ operator.name }}<template v-if="operator.inn">, ИНН {{ operator.inn }}</template>.
+      Оператор персональных данных — {{ operator.name }}, ИНН {{ operator.inn }}.
       Адрес: {{ site.region }}, {{ site.city }}, {{ site.street }}.
-      Телефон: <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a><template v-if="operator.email">,
-      e-mail: <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a></template>.
+      Телефон: <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>,
+      e-mail: <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a>.
     </p>
 
     <h2>2. Какие данные обрабатываем</h2>
@@ -76,8 +76,8 @@ useHead({ link: [{ key: "canonical", rel: "canonical", href: `${siteUrl}/politik
     <p>
       Вы можете узнать, какие ваши данные мы обрабатываем, попросить уточнить или удалить их,
       а также отозвать согласие на обработку. Для этого позвоните
-      по номеру <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a><template v-if="operator.email">
-      или напишите на <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a></template>.
+      по номеру <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
+      или напишите на <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a>.
       Ответим в течение 10 рабочих дней.
     </p>
     <p>

@@ -65,6 +65,26 @@ usePageSeo({
         </NuxtLink>
       </article>
 
+      <article class="price-group" id="dop-uslugi">
+        <header>
+          <h2>Дополнительные услуги</h2>
+        </header>
+        <table class="price-table">
+          <thead class="visually-hidden">
+            <tr>
+              <th scope="col">Услуга</th>
+              <th scope="col">Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in extraPrices" :key="row.name">
+              <th scope="row">{{ row.name }}</th>
+              <td>{{ row.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
       <article class="price-group" id="po-zaprosu">
         <header>
           <h2>Другие услуги</h2>

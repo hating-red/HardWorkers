@@ -47,17 +47,17 @@ export const site = {
   avitoUrl: "https://www.avito.ru/brands/i9397909",
   // Иконка в шапке показывается, только если ссылка заполнена
   messengers: [
-    { id: "max", label: "Макс", url: "https://web.max.ru/292860750" },
+    { id: "max", label: "Макс", url: "https://max.ru/u/f9LHodD0cOLPi-5cW5yU00GHpI0iwthS7eEBC_9Nwej5-Me5fnURnODEEs4" },
     { id: "vk", label: "ВКонтакте", url: "" },
     { id: "telegram", label: "Телеграм", url: "https://t.me/Stanislav_Matveev" },
   ],
   street: "ул. 1905 года, 35Н",
   hours: "Круглосуточно, без выходных",
-  // Оператор персональных данных — для политики и согласия; ИНН и e-mail выводятся, если заполнены
+  // Оператор персональных данных — для политики и согласия
   operator: {
-    name: "Матвеев Станислав Андреевич",
-    inn: "",
-    email: "",
+    name: "ИП Матвеев Станислав Андреевич",
+    inn: "590620551288",
+    email: "ip_matveev_sa@mail.ru",
   },
   regionalTerms: "Работаем по Перми и Пермскому краю. Для выезда за город заранее согласуем маршрут, время подачи и стоимость по телефону.",
 };
@@ -572,6 +572,11 @@ export const services: Service[] = [
       },
     ],
   },
+];
+
+// Услуги со своей единицей цены: в прайсе идут отдельным блоком
+export const extraPrices: ServicePrice[] = [
+  { name: "Сборка и разборка мебели", price: formatPriceFrom(600, "/ед.") },
 ];
 
 export const servicePriceLabel = (service: Service) =>

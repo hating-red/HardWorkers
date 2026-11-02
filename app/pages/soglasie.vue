@@ -21,8 +21,8 @@ useHead({ link: [{ key: "canonical", rel: "canonical", href: `${siteUrl}/soglasi
 
     <p>
       Отправляя заявку на сайте {{ siteUrl }}, я свободно, своей волей и в своем интересе даю согласие
-      {{ operator.name }}<template v-if="operator.inn"> (ИНН {{ operator.inn }})</template>, адрес: {{ site.region }},
-      {{ site.city }}, {{ site.street }}, — на обработку моих персональных данных на следующих условиях.
+      оператору — {{ operator.name }} (ИНН {{ operator.inn }}), адрес: {{ site.region }}, {{ site.city }},
+      {{ site.street }}, — на обработку моих персональных данных на следующих условиях.
     </p>
 
     <h2>Какие данные</h2>
@@ -41,8 +41,8 @@ useHead({ link: [{ key: "canonical", rel: "canonical", href: `${siteUrl}/soglasi
     <h2>Срок</h2>
     <p>
       Согласие действует до достижения целей обработки или до его отзыва. Отозвать согласие можно,
-      позвонив по номеру <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a><template v-if="operator.email">
-      или написав на <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a></template>.
+      позвонив по номеру <a class="text-link" :href="`tel:${site.phone}`">{{ site.phoneLabel }}</a>
+      или написав на <a class="text-link" :href="`mailto:${operator.email}`">{{ operator.email }}</a>.
     </p>
 
     <p>
