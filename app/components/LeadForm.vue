@@ -15,8 +15,45 @@ const consentError = ref("");
 const phoneInput = ref<HTMLInputElement>();
 const consentInput = ref<HTMLInputElement>();
 
+const PHONE_PREFIX = "+7 ";
+
+function setPhone(input: HTMLInputElement, value: string, digitsBeforeCaret?: number) {
+  phone.value = value;
+  // Vue не обновит поле, если отформатированное значение совпало с прошлым (например, ввели букву)
+  input.value = value;
+  if (digitsBeforeCaret === undefined) return;
+  let caret = PHONE_PREFIX.length;
+  for (let seen = 0; seen < digitsBeforeCaret && caret < value.length; caret++) {
+    if (/\d/.test(value[caret]!)) seen++;
+  }
+  input.setSelectionRange(caret, caret);
+}
+
+function onPhoneInput(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const caret = input.selectionStart ?? input.value.length;
+  const editingInside = caret < input.value.length;
+  const digitsBeforeCaret = phoneNationalDigits(input.value.slice(0, caret)).length;
+  setPhone(input, formatPhone(input.value), editingInside ? digitsBeforeCaret : undefined);
+  if (phoneError.value && isValidPhone(phone.value)) phoneError.value = "";
+}
+
+// Вставленный номер заменяет поле целиком, иначе "+7 " склеится с "8 964…"
+function onPhonePaste(event: ClipboardEvent) {
+  event.preventDefault();
+  setPhone(event.target as HTMLInputElement, formatPhone(event.clipboardData?.getData("text") ?? ""));
+}
+
+function onPhoneFocus(event: FocusEvent) {
+  if (!phone.value) setPhone(event.target as HTMLInputElement, PHONE_PREFIX);
+}
+
+function onPhoneBlur(event: FocusEvent) {
+  if (!phoneNationalDigits(phone.value)) setPhone(event.target as HTMLInputElement, "");
+}
+
 async function submit() {
-  if (phone.value.replace(/\D/g, "").length < 10) {
+  if (!isValidPhone(phone.value)) {
     phoneError.value = "Укажите номер полностью, например +7 964 123-45-67";
     phoneInput.value?.focus();
     return;
@@ -69,13 +106,17 @@ async function submit() {
         Телефон
         <input
           ref="phoneInput"
-          v-model="phone"
+          :value="phone"
           name="phone"
           type="tel"
           inputmode="tel"
           placeholder="+7 964 123-45-67"
           autocomplete="tel"
           maxlength="40"
+          @input="onPhoneInput"
+          @paste="onPhonePaste"
+          @focus="onPhoneFocus"
+          @blur="onPhoneBlur"
           required
           :aria-invalid="!!phoneError"
           aria-describedby="phone-error"

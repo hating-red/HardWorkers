@@ -30,10 +30,11 @@ export default defineEventHandler(async (event) => {
   // Скрытое поле заполняют только боты: отвечаем успехом, но никуда не отправляем
   if (field(body.website, 200)) return { ok: true };
 
-  const phone = field(body.phone, 40);
-  if (phone.replace(/\D/g, "").length < 10) {
+  const rawPhone = field(body.phone, 40);
+  if (!isValidPhone(rawPhone)) {
     throw createError({ statusCode: 400, statusMessage: "Invalid phone" });
   }
+  const phone = formatPhone(rawPhone);
   if (body.consent !== true) {
     throw createError({ statusCode: 400, statusMessage: "Consent required" });
   }
