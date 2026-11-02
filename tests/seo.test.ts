@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { normalizeSiteUrl, canIndexSite, escapeXml, indexablePages, serializeJsonLd } from "../shared/utils/seo.ts";
-import { services, site, generalFaq } from "../shared/utils/services.ts";
+import { services, site, generalFaq, formatPriceFrom } from "../shared/utils/services.ts";
 import {
   createHomePageSchema, createServicesPageSchema, createPricePageSchema,
   createServicePageSchema, createContactsPageSchema,
@@ -9,6 +9,21 @@ import {
 
 const origin = "https://hardworkers-seo-check.ru";
 const seo = { title: "Page title", description: "Page description" };
+
+test("additional services share packaging and furniture prices without an hourly group rate", () => {
+  const service = services.find((item) => item.slug === "upakovka");
+  assert.ok(service);
+  assert.equal(service.title, "Дополнительные услуги");
+  assert.deepEqual(service.prices, [
+    { name: "Упаковка вещей", price: formatPriceFrom(site.priceFrom) },
+    { name: "Сборка/разборка мебели", price: "600 ₽/ед." },
+  ]);
+  assert.equal(service.priceFrom, undefined);
+  assert.equal(service.priceLabel, formatPriceFrom(site.priceFrom, ""));
+  assert.match(service.metaTitle, /сборка и разборка мебели/);
+  assert.match(service.metaDescription, /600 ₽\/ед\./);
+  assert.ok(service.faq.some((item) => item.question.includes("сборка") && item.answer.includes("600 ₽")));
+});
 
 test("canonical origin normalizes trailing slashes and rejects malformed configuration", () => {
   assert.equal(normalizeSiteUrl(` ${origin}/ `), origin);
